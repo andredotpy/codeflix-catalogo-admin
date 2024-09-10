@@ -1,0 +1,9 @@
+[tool.pyright]
+venvPath = "."
+venv = "venv"
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.format]
+quote-style = "single"
