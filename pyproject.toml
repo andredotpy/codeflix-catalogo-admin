@@ -1,9 +1,14 @@
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
+
 [tool.pyright]
 venvPath = "."
 venv = "venv"
 
 [tool.ruff]
-line-length = 79
+line-length = 120
 
 [tool.ruff.format]
 quote-style = "single"
