@@ -1,0 +1,2 @@
+class InvalidCategoryInput(Exception):
+    pass

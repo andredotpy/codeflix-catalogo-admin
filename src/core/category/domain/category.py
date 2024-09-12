@@ -7,15 +7,13 @@ class Category:
     name: str
     description: str = ''
     is_active: bool = True
-    id: str | uuid.UUID = field(default_factory=uuid.uuid4)
+    id: uuid.UUID = field(default_factory=uuid.uuid4)
 
     def __post_init__(self):
         self.validate()
 
     def __str__(self) -> str:
-        return (
-            f'<Category: {self.name} - {self.description} ({self.is_active})>'
-        )
+        return f'<Category: {self.name} - {self.description} ({self.is_active})>'
 
     def __repr__(self) -> str:
         return f'<Category: {self.id}::{self.name}>'
