@@ -4,7 +4,7 @@ from uuid import UUID
 from src.core.category.application.category_repository import (
     CategoryRepository,
 )
-from src.core.category.application.exceptions import InvalidCategoryInput
+from src.core.category.application.use_cases.exceptions import InvalidCategoryInput
 from src.core.category.domain.category import Category
 
 
@@ -26,11 +26,7 @@ class CreateCategory:
 
     def execute(self, request: CreateCategoryRequest) -> CreateCategoryResponse:
         try:
-            category = Category(
-                name=request.name,
-                description=request.description,
-                is_active=request.is_active,
-            )
+            category = Category(name=request.name, description=request.description, is_active=request.is_active)
         except ValueError as e:
             raise InvalidCategoryInput(e)
 

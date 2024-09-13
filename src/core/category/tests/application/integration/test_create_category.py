@@ -2,8 +2,12 @@ from uuid import UUID
 
 import pytest
 
-from src.core.category.application.create_category import CreateCategory, CreateCategoryRequest, CreateCategoryResponse
-from src.core.category.application.exceptions import InvalidCategoryInput
+from src.core.category.application.use_cases.create_category import (
+    CreateCategory,
+    CreateCategoryRequest,
+    CreateCategoryResponse,
+)
+from src.core.category.application.use_cases.exceptions import InvalidCategoryInput
 from src.core.category.infra.in_memory_category_repository import InMemoryCategoryRepository
 
 
