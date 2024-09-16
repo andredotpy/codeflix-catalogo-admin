@@ -13,7 +13,9 @@ class Category:
         self.validate()
 
     def __str__(self) -> str:
-        return f'<Category: {self.name} - {self.description} ({self.is_active})>'
+        return (
+            f'<Category: {self.name} - {self.description} ({self.is_active})>'
+        )
 
     def __repr__(self) -> str:
         return f'<Category: {self.id}::{self.name}>'
@@ -29,7 +31,13 @@ class Category:
             raise ValueError('name cannot be empty')
 
     def update_category(self, name, description) -> None:
-        self.name = name
+        if name is not None:
+            if len(name) > 255:
+                raise ValueError('name cannot be longer than 255')
+            elif len(name) == 0:
+                raise ValueError('name cannot be empty')
+            else:
+                self.name = name
         self.description = description
         self.validate()
 
