@@ -29,3 +29,6 @@ class InMemoryCategoryRepository(CategoryRepository):
         if old_category is not None:
             self.delete(old_category.id)
             self.save(category=category)
+
+    def list(self) -> list[Category]:
+        return [category for category in self.categories]

@@ -27,5 +27,8 @@ class GetCategory:
         if category is None:
             raise CategoryNotFound(f'Category with id: {request.id} not found!')
         return GetCategoryResponse(
-            id=category.id, name=category.name, description=category.description, is_active=category.is_active
+            id=category.id,
+            name=category.name,
+            description=category.description,
+            is_active=category.is_active,
         )
