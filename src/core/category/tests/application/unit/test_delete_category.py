@@ -3,10 +3,13 @@ from unittest.mock import create_autospec
 
 import pytest
 
-from src.core.category.application.category_repository import CategoryRepository
-from src.core.category.application.use_cases.delete_category import DeleteCategory, DeleteCategoryRequest
+from src.core.category.application.use_cases.delete_category import (
+    DeleteCategory,
+    DeleteCategoryRequest,
+)
 from src.core.category.application.use_cases.exceptions import CategoryNotFound
 from src.core.category.domain.category import Category
+from src.core.category.domain.category_repository import CategoryRepository
 
 
 class TestDeleteCategory:
@@ -28,7 +31,9 @@ class TestDeleteCategory:
         not_found_id = uuid.uuid4()
         request = DeleteCategoryRequest(id=not_found_id)
 
-        with pytest.raises(CategoryNotFound, match=f'Category with id: {request.id} not found!'):
+        with pytest.raises(
+            CategoryNotFound, match=f'Category with id: {request.id} not found!'
+        ):
             use_case.execute(request)
 
         mock_repository.delete.assert_not_called()

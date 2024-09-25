@@ -3,10 +3,14 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from src.core.category.application.category_repository import CategoryRepository
 from src.core.category.application.use_cases.exceptions import CategoryNotFound
-from src.core.category.application.use_cases.get_category import GetCategory, GetCategoryRequest, GetCategoryResponse
+from src.core.category.application.use_cases.get_category import (
+    GetCategory,
+    GetCategoryRequest,
+    GetCategoryResponse,
+)
 from src.core.category.domain.category import Category
+from src.core.category.domain.category_repository import CategoryRepository
 
 
 class TestGetCategory:
@@ -35,5 +39,7 @@ class TestGetCategory:
         not_found_id = uuid.uuid4()
         request = GetCategoryRequest(id=not_found_id)
 
-        with pytest.raises(CategoryNotFound, match=f'Category with id: {request.id} not found!'):
+        with pytest.raises(
+            CategoryNotFound, match=f'Category with id: {request.id} not found!'
+        ):
             use_case.execute(request)

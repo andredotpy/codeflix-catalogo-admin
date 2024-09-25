@@ -1,6 +1,5 @@
 from unittest.mock import MagicMock
 
-from src.core.category.application.category_repository import CategoryRepository
 from src.core.category.application.use_cases.list_category import (
     CategoryOutput,
     ListCategory,
@@ -8,6 +7,7 @@ from src.core.category.application.use_cases.list_category import (
     ListCategoryResponse,
 )
 from src.core.category.domain.category import Category
+from src.core.category.domain.category_repository import CategoryRepository
 
 
 class TestListCategory:
