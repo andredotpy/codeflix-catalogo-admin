@@ -5,6 +5,7 @@ from rest_framework.status import (
     HTTP_200_OK,
     HTTP_400_BAD_REQUEST,
     HTTP_404_NOT_FOUND,
+    HTTP_201_CREATED,
 )
 from rest_framework.test import APIClient
 
@@ -119,5 +120,49 @@ class TestGetCategoryAPI:
             category_id=str(invalid_id)
         )
         response = APIClient().get(url)
+
+        assert response.status_code == HTTP_400_BAD_REQUEST
+
+
+@pytest.mark.django_db
+class TestCreateCategoryAPI:
+    def test_create_category(
+        self, category_repository: DjangoORMCategoryRepository
+    ):
+        url = '/api/categories/'
+        data = {
+            'name': 'Filme',
+            'description': 'Categoria para filmes.',
+        }
+        response = APIClient().post(url, data=data)
+        created_category_id = uuid.UUID(response.data['id'])
+
+        assert response.status_code == HTTP_201_CREATED
+        assert category_repository.get_by_id(
+            id=created_category_id
+        ) == Category(
+            id=created_category_id,
+            name='Filme',
+            description='Categoria para filmes.',
+            is_active=True,
+        )
+
+    def test_create_category_with_invalid_payload_no_name(self):
+        url = '/api/categories/'
+        data = {
+            'name': '',
+            'description': 'Categoria com nome vazio não pode.',
+        }
+        response = APIClient().post(url, data=data)
+
+        assert response.status_code == HTTP_400_BAD_REQUEST
+
+    def test_create_category_with_invalid_payload_name_to_long(self):
+        url = '/api/categories/'
+        data = {
+            'name': 'a' * 256,
+            'description': 'Categoria com nome vazio não pode.',
+        }
+        response = APIClient().post(url, data=data)
 
         assert response.status_code == HTTP_400_BAD_REQUEST
