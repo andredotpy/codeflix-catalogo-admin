@@ -2,10 +2,12 @@ import uuid
 
 import pytest
 from django.core.exceptions import ObjectDoesNotExist
-
 from django_project.category_app.models import Category as CategoryModel
-from django_project.category_app.repository import DjangoORMCategoryRepository
+
 from src.core.category.domain.category import Category
+from src.django_project.category_app.repository import (
+    DjangoORMCategoryRepository,
+)
 
 
 @pytest.mark.django_db
