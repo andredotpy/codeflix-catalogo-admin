@@ -42,20 +42,22 @@ class TestListCategoryAPI:
 
         url = '/api/categories/'
         response = APIClient().get(url)
-        expected_data = [
-            {
-                'id': str(category_filme.id),
-                'name': 'Filme',
-                'description': 'Categoria de filmes.',
-                'is_active': True,
-            },
-            {
-                'id': str(category_serie.id),
-                'name': 'Série',
-                'description': 'Categoria de séries.',
-                'is_active': True,
-            },
-        ]
+        expected_data = {
+            'data': [
+                {
+                    'id': str(category_filme.id),
+                    'name': 'Filme',
+                    'description': 'Categoria de filmes.',
+                    'is_active': True,
+                },
+                {
+                    'id': str(category_serie.id),
+                    'name': 'Série',
+                    'description': 'Categoria de séries.',
+                    'is_active': True,
+                },
+            ]
+        }
         assert response.status_code == HTTP_200_OK
         assert response.data == expected_data
 
@@ -75,10 +77,12 @@ class TestGetCategoryAPI:
         response = APIClient().get(url)
 
         expected_data = {
-            'id': str(category_filme.id),
-            'name': 'Filme',
-            'description': 'Categoria de filmes.',
-            'is_active': True,
+            'data': {
+                'id': str(category_filme.id),
+                'name': 'Filme',
+                'description': 'Categoria de filmes.',
+                'is_active': True,
+            }
         }
 
         assert response.status_code == HTTP_200_OK
