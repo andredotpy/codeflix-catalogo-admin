@@ -161,7 +161,7 @@ class TestCreateCategoryAPI:
         url = '/api/categories/'
         data = {
             'name': 'a' * 256,
-            'description': 'Categoria com nome vazio não pode.',
+            'description': 'Nome não pode ter mais que 255 chars.',
         }
         response = APIClient().post(url, data=data)
 
